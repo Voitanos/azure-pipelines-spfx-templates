@@ -1,0 +1,33 @@
+jobs:
+- job: SPFx_production_build_package
+  displayName: SPFx production build & packaging
+  pool:
+    vmImage: ubuntu-latest
+  steps:
+  - script: yarn --frozen-lockfile
+    displayName: Install dependencies with Yarn
+  - task: Gulp@1
+    displayName: SPFx build
+    inputs:
+      workingDirectory: $(Build.Repository.LocalPath)
+      targets: build
+  - task: Gulp@1
+    displayName: SPFx bundle (production)
+    inputs:
+      workingDirectory: $(Build.Repository.LocalPath)
+      targets: bundle
+      arguments: --ship
+  - task: Gulp@1
+    displayName: SPFx package solution (production)
+    inputs:
+      workingDirectory: $(Build.Repository.LocalPath)
+      targets: package-solution
+      arguments: --ship
+  - script: |
+      CMD_GET_SPPKG_NAME=$(find . -name '*.sppkg' -exec basename {} \;)
+      echo "##vso[task.setvariable variable=SpPkgFileName;isOutput=true]${CMD_GET_SPPKG_NAME}"
+    displayName: Get generated *.sppkg filename
+    name: GetSharePointPackage
+  - publish: $(Build.Repository.LocalPath)/sharepoint/solution/$(GetSharePointPackage.SpPkgFileName)
+    displayName: Publish SharePoint package (*.sppkg)
+    artifact: spfx-package
