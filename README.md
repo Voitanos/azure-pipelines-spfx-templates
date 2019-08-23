@@ -28,7 +28,7 @@ resources:
 
 > Note: If you do not have a `github` service connection in the project hosting your pipeline (or you do not have access to it), you can create one via **Project Settings**. Just make sure the name of this service connection is specified in the `endpoint` field. See [service connections](https://docs.microsoft.com/azure/devops/pipelines/library/service-endpoints?view=azure-devops&tabs=yaml) for more details.
 
-### Step 2: Add the job template to your Azure pipeline
+### Step 2: Add the job templates to your Azure pipeline
 
 Create a stage for building the project that contains the template:
 
@@ -39,11 +39,20 @@ Create a stage for building the project that contains the template:
     - template: jobs/build.yml@azure-pipelines-spfx-templates
 ```
 
+Create a stage for testing the project that contains the template:
+
+```yml
+# azure-pipelines.yml
+- stage: Test
+  jobs:
+    - template: jobs/test.yml@azure-pipelines-spfx-templates
+```
+
 ## Templates
 
 This project includes the following templates:
 
-### job-build
+### jobs/build.yml
 
 This job template does the following:
 
@@ -51,11 +60,33 @@ This job template does the following:
 1. Build the project using `gulp build`
 1. Bundle the project using `gulp bundle --ship`
 1. Package the solution using `gulp package-solution --ship`
-1. Publish the resulting `*.sppkg` as a build artifact named **spfx-package**
+1. Publish the resulting `*.sppkg` as a build artifact named **spfx-package** to the pipeline run
 
 #### Parameters
 
-None.
+Optional parameters:
+
+- **jobName**: Name of the job
+- **displayName**: Display name of the job
+
+### jobs/test.yml
+
+This job template does the following:
+
+1. Install all dependencies using Yarn
+1. Build the project using `gulp build`
+
+    *Required when using Jest to test rendered React components to work around an issue with the un-build `*.scss.ts` file. This build step will build that file so the Jest React component rendering tests won't fail.*
+1. Execute the tests using the project's **test** command defined in the **package.json**'s `scripts` property.
+1. Publish the resulting JUnit test report as a test result artifact to the pipeline run
+1. Publish the resulting Cobertura code coverage report as a code coverage result artifact to the pipeline run
+
+#### Parameters
+
+Optional parameters:
+
+- **jobName**: Name of the job
+- **displayName**: Display name of the job
 
 ### Requirements
 

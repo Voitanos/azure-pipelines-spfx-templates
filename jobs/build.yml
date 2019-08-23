@@ -1,33 +1,52 @@
-jobs:
-- job: SPFx_production_build_package
+parameters:
+  jobName: build_package
   displayName: SPFx production build & packaging
+
+jobs:
+- job: ${{ parameters.jobName }}
+  displayName: ${{ parameters.displayName }}
   pool:
     vmImage: ubuntu-latest
   steps:
+  ##########################################
+  ## install dependencies using Yarn
+  ##########################################
   - script: yarn --frozen-lockfile
     displayName: Install dependencies with Yarn
+  ##########################################
+  ## execute: gulp build
+  ##########################################
   - task: Gulp@1
     displayName: SPFx build
     inputs:
-      workingDirectory: $(Build.Repository.LocalPath)
       targets: build
+  ##########################################
+  ## execute: gulp bundle --ship
+  ##########################################
   - task: Gulp@1
     displayName: SPFx bundle (production)
     inputs:
-      workingDirectory: $(Build.Repository.LocalPath)
       targets: bundle
       arguments: --ship
+  ##########################################
+  ## execute: gulp package-solution --ship
+  ##########################################
   - task: Gulp@1
     displayName: SPFx package solution (production)
     inputs:
-      workingDirectory: $(Build.Repository.LocalPath)
       targets: package-solution
       arguments: --ship
+  ##########################################
+  ## determine name of generated *.sppkg
+  ##########################################
   - script: |
       CMD_GET_SPPKG_NAME=$(find . -name '*.sppkg' -exec basename {} \;)
       echo "##vso[task.setvariable variable=SpPkgFileName;isOutput=true]${CMD_GET_SPPKG_NAME}"
     displayName: Get generated *.sppkg filename
     name: GetSharePointPackage
+  ##########################################
+  ## publish *.sppkg as build artifact
+  ##########################################
   - publish: $(Build.Repository.LocalPath)/sharepoint/solution/$(GetSharePointPackage.SpPkgFileName)
     displayName: Publish SharePoint package (*.sppkg)
     artifact: spfx-package

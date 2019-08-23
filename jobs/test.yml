@@ -1,0 +1,43 @@
+parameters:
+  jobName: run_tests
+  displayName: Execute tests
+
+jobs:
+- job: ${{ parameters.jobName }}
+  displayName: ${{ parameters.displayName }}
+  pool:
+    vmImage: ubuntu-latest
+  steps:
+  ##########################################
+  ## install dependencies using Yarn
+  ##########################################
+  - script: yarn --frozen-lockfile
+    displayName: Install dependencies with Yarn
+  ##########################################
+  ## execute: gulp build
+  ##########################################
+  - task: Gulp@1
+    displayName: SPFx build
+    inputs:
+      targets: build
+  ##########################################
+  ## execute tests
+  ##########################################
+  - script: yarn run test
+    displayName: Run unit tests from test script
+  ##########################################
+  ## publish junit test results to devops pipeline run
+  ##########################################
+  - task: PublishTestResults@2
+    displayName: Publish test results
+    inputs:
+      testResultsFormat: JUnit
+      testResultsFiles: '**/junit.xml'
+  ##########################################
+  ## publish code coverage results to devops pipeline run
+  ##########################################
+  - task: PublishCodeCoverageResults@1
+    displayName: Publish code coverage results
+    inputs:
+      codeCoverageTool: cobertura
+      summaryFileLocation: '$(System.DefaultWorkingDirectory)/**/*coverage.xml'
