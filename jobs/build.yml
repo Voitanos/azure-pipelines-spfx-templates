@@ -1,10 +1,12 @@
 parameters:
-  jobName: build_package
-  displayName: SPFx production build & packaging
+  # unique name of the job
+  job_name: build_package
+  # friendly name of the job
+  display_name: SPFx production build & packaging
 
 jobs:
-- job: ${{ parameters.jobName }}
-  displayName: ${{ parameters.displayName }}
+- job: ${{ parameters.job_name }}
+  displayName: ${{ parameters.display_name }}
   pool:
     vmImage: ubuntu-latest
   steps:
