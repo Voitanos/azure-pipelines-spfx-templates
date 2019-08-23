@@ -2,13 +2,13 @@
 
 [![Build Status](https://dev.azure.com/aconn/azure-pipelines-spfx-templates-test/_apis/build/status/Voitanos.azure-pipelines-spfx-templates-test?branchName=master)](https://dev.azure.com/aconn/azure-pipelines-spfx-templates-test/_build/latest?definitionId=15&branchName=master)
 
-This repo contains job templates for SharePoint Framework (SPFx) projects using Azure DevOps Pipelines.
+This repo contains templates for SharePoint Framework (SPFx) projects using Azure DevOps Pipelines.
 
-Three different job templates are provided in this project:
+## Included Templates
 
-- **job-build**: Used for building, bundling & creating the SharePoint `*.sppkg` file for your project.
-- **job-test**: Used to execute your tests & publish the resulting JUnit & code coverage report.
-- **job-deploy**: Used to upload & deploy the SharePoint package `*.sppkg` file to the specified App Catalog site (*both tenant & site collection scoped are support*).
+- **[./jobs/build.yml](#jobsyml)**: Used for building, bundling & creating the SharePoint `*.sppkg` file for your project.
+- **[./jobs/test.yml](#jobstestyml)**: Used to execute your tests & publish the resulting JUnit & code coverage report.
+- **[./jobs/deploy.yml](#jobsdeployyml)**: Used to upload & deploy the SharePoint package `*.sppkg` file to the specified App Catalog site (*both tenant & site collection scoped are support*).
 
 > See the sample SPFx project [azure-pipelines-spfx-templates-test](https://github.com/Voitanos/azure-pipelines-spfx-templates-test) configured with an Azure DevOps Pipeline that uses these templates.
 
@@ -66,7 +66,7 @@ Create a stage for deploying the project that contains the template:
         target_environment: dev_environment
         o365_user_login: foo@contoso.onmicrosoft.com
         o365_user_password: <password>
-        o365_app_catalog_site_url: https://contoso.onmicrosoft.com/sites/AppCatalog
+        o365_app_catalog_site_url: https://contoso.sharepoint.com/sites/AppCatalog
         o365cli_app_catalog_scope: tenant
         o365cli_deploy_extra_arguments: '--skipFeatureDeployment'
 ```
