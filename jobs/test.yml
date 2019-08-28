@@ -3,6 +3,11 @@ parameters:
   job_name: run_tests
   # friendly name of the job
   display_name: Execute tests
+  # agent pool details (default: MSFT hosted Ubuntu)
+  pool: 
+    vmImage: ubuntu-latest
+  # relative path to the project root if not in root of repo
+  working_directory: ''
 
 jobs:
 - job: ${{ parameters.job_name }}
@@ -15,18 +20,21 @@ jobs:
   ##########################################
   - script: yarn --frozen-lockfile
     displayName: Install dependencies with Yarn
+    workingDirectory: ${{ parameters.working_directory }}
   ##########################################
   ## execute: gulp build
   ##########################################
-  - task: Gulp@1
+  - task: Gulp@0
     displayName: SPFx build
     inputs:
+      gulpFile: $(Build.Repository.LocalPath)/${{ parameters.working_directory }}/gulpfile.js
       targets: build
   ##########################################
   ## execute tests
   ##########################################
   - script: yarn run test
     displayName: Run unit tests from test script
+    workingDirectory: ${{ parameters.working_directory }}
   ##########################################
   ## publish junit test results to devops pipeline run
   ##########################################

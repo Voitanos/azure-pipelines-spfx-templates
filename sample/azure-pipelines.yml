@@ -1,0 +1,66 @@
+trigger:
+  branches:
+    include:
+      - '*'
+
+resources:
+  repositories:
+  - repository: azure-pipelines-spfx-templates
+    type: github
+    name: voitanos/azure-pipelines-spfx-templates
+    endpoint: voitanos-github
+
+variables:
+  - group: office365credentials
+
+stages:
+- stage: Build
+  dependsOn: []
+  jobs:
+    - template: jobs/build.yml@azure-pipelines-spfx-templates
+      parameters:
+        # comment the next two lines out to use the Microsoft-Hosted agent Ubuntu pool
+        pool:
+          name: Default
+        working_directory: sample
+- stage: Test
+  dependsOn: []
+  jobs:
+    - template: jobs/test.yml@azure-pipelines-spfx-templates
+      parameters:
+        # comment the next two lines out to use the Microsoft-Hosted agent Ubuntu pool
+        pool:
+          name: Default
+        working_directory: sample
+- stage: Deploy_Dev
+  dependsOn:
+    - Build
+    - Test
+  jobs:
+    - template: jobs/deploy.yml@azure-pipelines-spfx-templates
+      parameters:
+        display_name: Deploy to development
+        pool:
+          name: Default
+        target_environment: dev_environment
+        o365_user_login: $(AdminUserLogin)
+        o365_user_password: $(AdminUserPassword)
+        o365_app_catalog_site_url: https://voitanosdev.sharepoint.com/sites/SPFx-DevOps-DevEnv
+        o365cli_app_catalog_scope: sitecollection
+        o365cli_deploy_extra_arguments: '--skipFeatureDeployment'
+- stage: Deploy_Prod
+  dependsOn:
+    - Build
+    - Test
+  jobs:
+    - template: jobs/deploy.yml@azure-pipelines-spfx-templates
+      parameters:
+        display_name: Deploy to production
+        pool:
+          name: Default
+        target_environment: prod_environment
+        o365_user_login: $(AdminUserLogin)
+        o365_user_password: $(AdminUserPassword)
+        o365_app_catalog_site_url: https://voitanosdev.sharepoint.com/sites/SPFx-DevOps-ProdEnv
+        o365cli_app_catalog_scope: sitecollection
+        o365cli_deploy_extra_arguments: '--skipFeatureDeployment'

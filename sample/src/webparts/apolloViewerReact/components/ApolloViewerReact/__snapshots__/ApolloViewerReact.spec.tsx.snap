@@ -1,0 +1,198 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders set A of missions 1`] = `
+<div>
+  <div>
+    <div>
+      <div>
+        <span>
+          Welcome to the Apollo Mission Viewer (React)!
+        </span>
+        <ApolloMissionList
+          missions={
+            Array [
+              Object {
+                "crew": Array [
+                  Object {
+                    "astronaut_id": "26",
+                    "role": "Commander",
+                  },
+                  Object {
+                    "astronaut_id": "17",
+                    "role": "Pilot",
+                  },
+                  Object {
+                    "astronaut_id": "31",
+                    "role": "Sr Pilot",
+                  },
+                  Object {
+                    "astronaut_id": "31",
+                    "role": "Command Module Pilot",
+                  },
+                  Object {
+                    "astronaut_id": "17",
+                    "role": "Lunar Module Pilot",
+                  },
+                ],
+                "end_date": "08/07/1971",
+                "id": "AS-510",
+                "image": "apollo-15.png",
+                "launch_date": "07/26/1971",
+                "name": "Apollo 15",
+                "summary": "First Extended LM and rover, landed in Hadley-Apennine. Surface EVA time:18:33 hr. Samples returned: 169.10 pounds (76.70 kg).",
+                "wiki_href": "https://en.wikipedia.org/wiki/Apollo_15",
+              },
+              Object {
+                "crew": Array [
+                  Object {
+                    "astronaut_id": "32",
+                    "role": "Commander",
+                  },
+                  Object {
+                    "astronaut_id": "11",
+                    "role": "Pilot",
+                  },
+                  Object {
+                    "astronaut_id": "19",
+                    "role": "Sr Pilot",
+                  },
+                  Object {
+                    "astronaut_id": "29",
+                    "role": "Command Module Pilot",
+                  },
+                  Object {
+                    "astronaut_id": "11",
+                    "role": "Lunar Module Pilot",
+                  },
+                ],
+                "end_date": "04/27/1972",
+                "id": "AS-511",
+                "image": "apollo-16.png",
+                "launch_date": "04/16/1972",
+                "name": "Apollo 16",
+                "summary": "Landed in Plain of Descartes. Surface EVA time: 20:14 hr. Samples returned: 207.89 pounds (94.30 kg).",
+                "wiki_href": "https://en.wikipedia.org/wiki/Apollo_16",
+              },
+              Object {
+                "crew": Array [
+                  Object {
+                    "astronaut_id": "6",
+                    "role": "Commander",
+                  },
+                  Object {
+                    "astronaut_id": "24",
+                    "role": "Pilot",
+                  },
+                  Object {
+                    "astronaut_id": "13",
+                    "role": "Sr Pilot",
+                  },
+                  Object {
+                    "astronaut_id": "13",
+                    "role": "Command Module Pilot",
+                  },
+                  Object {
+                    "astronaut_id": "24",
+                    "role": "Lunar Module Pilot",
+                  },
+                ],
+                "end_date": "12/19/1972",
+                "id": "AS-512",
+                "image": "apollo-17.png",
+                "launch_date": "12/07/1972",
+                "name": "Apollo 17",
+                "summary": "Only Saturn V night launch. Landed in Taurus-Littrow. First geologist on the Moon. Final manned Moon landing. Surface EVA time: 22:02 hr. Samples returned: 243.40 pounds (110.40 kg).",
+                "wiki_href": "https://en.wikipedia.org/wiki/Apollo_17",
+              },
+            ]
+          }
+          onDeleteMission={[Function]}
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renders set A of missions 2`] = `
+<div>
+  <div>
+    <div>
+      <div>
+        <span>
+          Welcome to the Apollo Mission Viewer (React)!
+        </span>
+        <ApolloMissionList
+          missions={
+            Array [
+              Object {
+                "crew": Array [
+                  Object {
+                    "astronaut_id": "32",
+                    "role": "Commander",
+                  },
+                  Object {
+                    "astronaut_id": "11",
+                    "role": "Pilot",
+                  },
+                  Object {
+                    "astronaut_id": "19",
+                    "role": "Sr Pilot",
+                  },
+                  Object {
+                    "astronaut_id": "29",
+                    "role": "Command Module Pilot",
+                  },
+                  Object {
+                    "astronaut_id": "11",
+                    "role": "Lunar Module Pilot",
+                  },
+                ],
+                "end_date": "04/27/1972",
+                "id": "AS-511",
+                "image": "apollo-16.png",
+                "launch_date": "04/16/1972",
+                "name": "Apollo 16",
+                "summary": "Landed in Plain of Descartes. Surface EVA time: 20:14 hr. Samples returned: 207.89 pounds (94.30 kg).",
+                "wiki_href": "https://en.wikipedia.org/wiki/Apollo_16",
+              },
+              Object {
+                "crew": Array [
+                  Object {
+                    "astronaut_id": "6",
+                    "role": "Commander",
+                  },
+                  Object {
+                    "astronaut_id": "24",
+                    "role": "Pilot",
+                  },
+                  Object {
+                    "astronaut_id": "13",
+                    "role": "Sr Pilot",
+                  },
+                  Object {
+                    "astronaut_id": "13",
+                    "role": "Command Module Pilot",
+                  },
+                  Object {
+                    "astronaut_id": "24",
+                    "role": "Lunar Module Pilot",
+                  },
+                ],
+                "end_date": "12/19/1972",
+                "id": "AS-512",
+                "image": "apollo-17.png",
+                "launch_date": "12/07/1972",
+                "name": "Apollo 17",
+                "summary": "Only Saturn V night launch. Landed in Taurus-Littrow. First geologist on the Moon. Final manned Moon landing. Surface EVA time: 22:02 hr. Samples returned: 243.40 pounds (110.40 kg).",
+                "wiki_href": "https://en.wikipedia.org/wiki/Apollo_17",
+              },
+            ]
+          }
+          onDeleteMission={[Function]}
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;

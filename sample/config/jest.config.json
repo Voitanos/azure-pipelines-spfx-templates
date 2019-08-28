@@ -1,0 +1,57 @@
+{
+  "collectCoverage": true,
+  "collectCoverageFrom": [
+    "<rootDir>/**/*.{ts,tsx}",
+    "!<rootDir>/**/*.scss.*",
+    "!<rootDir>/loc/**/*.*"
+  ],
+  "coverageDirectory": "<rootDir>/../temp/test",
+  "coverageReporters": [
+    "text",
+    "json",
+    "lcov",
+    "text-summary",
+    "cobertura"
+  ],
+  "globals": {
+    "ts-jest": {
+      "diagnostics": {
+        "ignoreCodes":  "TS151001"
+      }
+    }
+  },
+  "moduleFileExtensions": [
+    "ts", 
+    "tsx", 
+    "js", 
+    "json"
+  ],
+  "moduleNameMapper": {
+    "\\.(css|scss)$": "identity-obj-proxy",
+    "^resx-strings/en-us.json": "<rootDir>/../node_modules/@microsoft/sp-core-library/lib/resx-strings/en-us.json"
+  },
+  "reporters":[
+    "default",
+    ["jest-junit", { 
+      "suiteName": "jest tests",
+      "outputDirectory": "temp/test/junit",
+      "outputName": "junit.xml"
+    }]
+  ],
+  "rootDir": "../src",
+  "setupFiles": [
+    "raf/polyfill",
+    "<rootDir>/../config/jest.enzyme.js"
+  ],
+  "snapshotSerializers": [
+    "enzyme-to-json/serializer"
+  ],
+  "testMatch": [
+    "**/src/**/*.spec.+(ts|tsx|js)"
+  ],
+  "testURL": "http://localhost",
+  "transform": {
+    "^.+\\.(ts|tsx)$": "ts-jest"
+  },
+  "verbose": false
+}

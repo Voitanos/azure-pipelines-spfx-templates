@@ -1,8 +1,11 @@
 parameters:
   # unique name of the job
-  job_name: 'deploy_sppkg'
+  job_name: deploy_sppkg
   # friendly name of the job
-  display_name: 'Upload & deploy *.sppkg to SharePoint app catalog'
+  display_name: Upload & deploy *.sppkg to SharePoint app catalog
+  # agent pool details (default: MSFT hosted Ubuntu)
+  pool: 
+    vmImage: ubuntu-latest
   # name of target enviroment deploying to
   target_environment: ''
   # o365 user credentials
@@ -19,8 +22,7 @@ parameters:
 jobs:
 - deployment: ${{ parameters.job_name }}
   displayName: ${{ parameters.display_name }}
-  pool:
-    vmImage: ubuntu-latest
+  pool: ${{ parameters.pool }}
   environment: ${{ parameters.target_environment }}
   strategy:
     runOnce:

@@ -3,39 +3,47 @@ parameters:
   job_name: build_package
   # friendly name of the job
   display_name: SPFx production build & packaging
+  # agent pool details (default: MSFT hosted Ubuntu)
+  pool: 
+    vmImage: ubuntu-latest
+  # relative path to the project root if not in root of repo
+  working_directory: ''
 
 jobs:
 - job: ${{ parameters.job_name }}
   displayName: ${{ parameters.display_name }}
-  pool:
-    vmImage: ubuntu-latest
+  pool: ${{ parameters.pool }}
   steps:
   ##########################################
   ## install dependencies using Yarn
   ##########################################
   - script: yarn --frozen-lockfile
     displayName: Install dependencies with Yarn
+    workingDirectory: ${{ parameters.working_directory }}
   ##########################################
   ## execute: gulp build
   ##########################################
-  - task: Gulp@1
+  - task: Gulp@0
     displayName: SPFx build
     inputs:
+      gulpFile: $(Build.Repository.LocalPath)/${{ parameters.working_directory }}/gulpfile.js
       targets: build
   ##########################################
   ## execute: gulp bundle --ship
   ##########################################
-  - task: Gulp@1
+  - task: Gulp@0
     displayName: SPFx bundle (production)
     inputs:
+      gulpFile: $(Build.Repository.LocalPath)/${{ parameters.working_directory }}/gulpfile.js
       targets: bundle
       arguments: --ship
   ##########################################
   ## execute: gulp package-solution --ship
   ##########################################
-  - task: Gulp@1
+  - task: Gulp@0
     displayName: SPFx package solution (production)
     inputs:
+      gulpFile: $(Build.Repository.LocalPath)/${{ parameters.working_directory }}/gulpfile.js
       targets: package-solution
       arguments: --ship
   ##########################################
@@ -49,6 +57,6 @@ jobs:
   ##########################################
   ## publish *.sppkg as build artifact
   ##########################################
-  - publish: $(Build.Repository.LocalPath)/sharepoint/solution/$(GetSharePointPackage.SpPkgFileName)
+  - publish: $(Build.Repository.LocalPath)/${{ parameters.working_directory }}/sharepoint/solution/$(GetSharePointPackage.SpPkgFileName)
     displayName: Publish SharePoint package (*.sppkg)
     artifact: spfx-package

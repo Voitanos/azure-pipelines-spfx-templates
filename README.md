@@ -88,10 +88,14 @@ This job template does the following:
 
 #### Parameters
 
-Optional parameters:
+|       Parameter       | Required? |                                               Description                                               |
+| --------------------- | :-------: | ------------------------------------------------------------------------------------------------------- |
+| **job_name**          |    no     | Name of the job, A-Z, a-z, 0-9, and underscore (*Default: build_package*)                               |
+| **display_name**      |    no     | Friendly name to display in the UI (*Default: SPFx production build & packaging*)                       |
+| **pool**              |    no     | Scalar property used to override the default **ubuntu-latest** VM host for the agent.                   |
+| **working_directory** |    no     | Leave blank if project in root of repo; otherwise set to root relative path to project. (*Default: ''*) |
 
-- **job_name**: Name of the job, A-Z, a-z, 0-9, and underscore
-- **display_name**: Friendly name to display in the UI
+> NOTE: Refer to the sample project for examples of how to set the **pool** & **working_directory** properties to different values when (1) you want to use a different agent pool, such as self-hosted agents (like the sample uses) or (2) when your project resides in a subfolder.
 
 ### jobs/test.yml
 
@@ -107,10 +111,14 @@ This job template does the following:
 
 #### Parameters
 
-Optional parameters:
+|       Parameter       | Required? |                                               Description                                               |
+| --------------------- | :-------: | ------------------------------------------------------------------------------------------------------- |
+| **job_name**          |    no     | Name of the job, A-Z, a-z, 0-9, and underscore (*Default: build_package*)                               |
+| **display_name**      |    no     | Friendly name to display in the UI (*Default: SPFx production build & packaging*)                       |
+| **pool**              |    no     | Scalar property used to override the default **ubuntu-latest** VM host for the agent.                   |
+| **working_directory** |    no     | Leave blank if project in root of repo; otherwise set to root relative path to project. (*Default: ''*) |
 
-- **job_name**: Name of the job, A-Z, a-z, 0-9, and underscore
-- **display_name**: Friendly name to display in the UI
+> NOTE: Refer to the sample project for examples of how to set the **pool** & **working_directory** properties to different values when (1) you want to use a different agent pool, such as self-hosted agents (like the sample uses) or (2) when your project resides in a subfolder.
 
 ### jobs/deploy.yml
 
@@ -125,19 +133,19 @@ This job template does the following:
 
 #### Parameters
 
-Required parameters:
+|             Parameter              | Required? |                                     Description                                      |
+| ---------------------------------- | :-------: | ------------------------------------------------------------------------------------ |
+| **job_name**                       |    no     | Name of the job, A-Z, a-z, 0-9, and underscore (*Default: build_package*)            |
+| **display_name**                   |    no     | Friendly name to display in the UI (*Default: SPFx production build & packaging*)    |
+| **pool**                           |    no     | Scalar property used to override the default **ubuntu-latest** VM host for the agent |
+| **o365cli_deploy_extra_arguments** |    no     | Additional arguments to add to the deploy command                                    |
+| **target_environment**             |    yes    | Name of the environment to submit to                                                 |
+| **o365_user_login**                |    yes    | Credentials to use to upload & deploy to App Catalog                                 |
+| **o365_user_password**             |    yes    | Credentials to use to upload & deploy to App Catalog                                 |
+| **o365_app_catalog_site_url**      |    yes    | URL of the App Catalog site to deploy to                                             |
+| **o365cli_app_catalog_scope**      |    yes    | App Catalog scope (`tenant` \ `sitecollection`)                                      |
 
-- **target_environment**: Name of the environment to submit to
-- **o365_user_login**: Credentials to use to upload & deploy to App Catalog
-- **o365_user_password**: Credentials to use to upload & deploy to App Catalog
-- **o365_app_catalog_site_url**: URL of the App Catalog site to deploy to
-- **o365cli_app_catalog_scope**: App Catalog scope (`tenant|sitecollection`)
-
-Optional parameters:
-
-- **job_name**: Name of the job, A-Z, a-z, 0-9, and underscore
-- **display_name**: Friendly name to display in the UI
-- **o365cli_deploy_extra_arguments**: Additional arguments to add to the deploy command
+> NOTE: Refer to the sample project for examples of how to set the **pool** property to different values when you want to use a different agent pool, such as self-hosted agents (like the sample uses).
 
 ### Limitations
 

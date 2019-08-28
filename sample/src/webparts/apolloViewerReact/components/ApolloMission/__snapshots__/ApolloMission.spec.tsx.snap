@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render mission 1`] = `
+<div>
+  <table>
+    <tbody>
+      <tr>
+        <td
+          className="ms-textAlignRight"
+        >
+          <strong>
+            ID:
+          </strong>
+        </td>
+        <td>
+          AS-506
+        </td>
+      </tr>
+      <tr>
+        <td
+          className="ms-textAlignRight"
+        >
+          <strong>
+            Name:
+          </strong>
+        </td>
+        <td>
+          Apollo 11
+        </td>
+      </tr>
+      <tr>
+        <td
+          className="ms-textAlignRight"
+        >
+          <strong>
+            Date:
+          </strong>
+        </td>
+        <td>
+          07/16/1969
+           - 
+          07/24/1969
+        </td>
+      </tr>
+      <tr>
+        <td
+          className="ms-textAlignRight"
+        >
+          <strong>
+            Summary:
+          </strong>
+        </td>
+        <td>
+          First manned landing, in Tranquility Base, Sea of Tranquility. Surface EVA time: 2:31 hr. Samples returned: 47.51 pounds (21.55 kg)
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <a
+    href="https://en.wikipedia.org/wiki/Apollo_11"
+  >
+    <span>
+      Learn more
+    </span>
+  </a>
+  <a
+    href="#"
+    onClick={[Function]}
+  >
+    <span>
+      Remove Mission
+    </span>
+  </a>
+</div>
+`;

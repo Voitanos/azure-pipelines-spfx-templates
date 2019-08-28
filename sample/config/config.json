@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "apollo-viewer-react-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/apolloViewerReact/ApolloViewerReactWebPart.js",
+          "manifest": "./src/webparts/apolloViewerReact/ApolloViewerReactWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "ApolloViewerReactWebPartStrings": "lib/webparts/apolloViewerReact/loc/{locale}.js"
+  }
+}

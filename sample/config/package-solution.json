@@ -1,0 +1,14 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "cswp-apollo-viewer-react-client-side-solution",
+    "id": "2ef6dc27-9751-4077-9ce7-ee331e35ca09",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "isDomainIsolated": false,
+    "skipFeatureDeployment": true
+  },
+  "paths": {
+    "zippedPackage": "solution/cswp-apollo-viewer-react.sppkg"
+  }
+}

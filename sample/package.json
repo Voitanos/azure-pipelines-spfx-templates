@@ -1,0 +1,54 @@
+{
+  "name": "cswp-apollo-viewer-react",
+  "description": "Sample project to demonstrate Azure DevOps with automated CI/CD",
+  "version": "0.0.1",
+  "private": true,
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "build": "gulp bundle",
+    "clean": "gulp clean",
+    "test": "./node_modules/.bin/jest --config ./config/jest.config.json",
+    "test-watch": "./node_modules/.bin/jest --config ./config/jest.config.json --watchAll"
+  },
+  "dependencies": {
+    "@microsoft/sp-core-library": "1.8.1",
+    "@microsoft/sp-lodash-subset": "1.8.1",
+    "@microsoft/sp-office-ui-fabric-core": "1.8.1",
+    "@microsoft/sp-property-pane": "1.8.1",
+    "@microsoft/sp-webpart-base": "1.8.1",
+    "@types/es6-promise": "0.0.33",
+    "@types/webpack-env": "1.13.1",
+    "react": "16.8.5",
+    "react-dom": "16.8.5",
+    "@types/react": "16.8.8",
+    "@types/react-dom": "16.8.3"
+  },
+  "resolutions": {
+    "@types/react": "16.8.8"
+  },
+  "devDependencies": {
+    "@microsoft/rush-stack-compiler-3.3": "0.1.6",
+    "@microsoft/sp-build-web": "1.8.1",
+    "@microsoft/sp-module-interfaces": "1.8.1",
+    "@microsoft/sp-tslint-rules": "1.8.1",
+    "@microsoft/sp-webpart-workbench": "1.8.1",
+    "@types/chai": "3.4.34",
+    "@types/jest": "^24.0.11",
+    "@types/mocha": "2.2.38",
+    "@types/react-test-renderer": "^16.8.1",
+    "ajv": "~5.2.2",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.12.1",
+    "enzyme-to-json": "^3.3.5",
+    "gulp": "~3.9.1",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^24.7.1",
+    "jest-junit": "^7.0.0",
+    "raf": "^3.4.1",
+    "react-test-renderer": "^16.8.6",
+    "ts-jest": "^24.0.2",
+    "typescript": "3.3"
+  }
+}
