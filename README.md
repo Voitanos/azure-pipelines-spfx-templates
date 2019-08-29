@@ -1,6 +1,6 @@
 # Azure Pipeline Templates for SharePoint Framework Projects
 
-[![Build Status](https://dev.azure.com/aconn/azure-pipelines-spfx-templates-test/_apis/build/status/Voitanos.azure-pipelines-spfx-templates-test?branchName=master)](https://dev.azure.com/aconn/azure-pipelines-spfx-templates-test/_build/latest?definitionId=15&branchName=master)
+[![Build Status](https://dev.azure.com/aconn/Azure%20Pipelines%20SPFx%20Templates/_apis/build/status/Voitanos.azure-pipelines-spfx-templates?branchName=master)](https://dev.azure.com/aconn/Azure%20Pipelines%20SPFx%20Templates/_build/latest?definitionId=20&branchName=master)
 
 This repo contains templates for SharePoint Framework (SPFx) projects using Azure DevOps Pipelines.
 
@@ -10,7 +10,7 @@ This repo contains templates for SharePoint Framework (SPFx) projects using Azur
 - **[./jobs/test.yml](#jobstestyml)**: Used to execute your tests & publish the resulting JUnit & code coverage report.
 - **[./jobs/deploy.yml](#jobsdeployyml)**: Used to upload & deploy the SharePoint package `*.sppkg` file to the specified App Catalog site (*both tenant & site collection scoped are support*).
 
-> See the sample SPFx project [azure-pipelines-spfx-templates-test](https://github.com/Voitanos/azure-pipelines-spfx-templates-test) configured with an Azure DevOps Pipeline that uses these templates.
+> See the sample SPFx project [./sample](./sample) configured with an Azure DevOps Pipeline that uses these templates.
 
 ## Usage
 
@@ -31,6 +31,8 @@ resources:
 ```
 
 > Note: If you do not have a `github` service connection in the project hosting your pipeline (or you do not have access to it), you can create one via **Project Settings**. Just make sure the name of this service connection is specified in the `endpoint` field. See [service connections](https://docs.microsoft.com/azure/devops/pipelines/library/service-endpoints?view=azure-devops&tabs=yaml) for more details.
+>
+> The sample project's service connection is named **voitanos-github**, as it points to this org's repo. The name is entirely up to you though.
 
 ### Step 2: Add the job templates to your Azure pipeline
 
@@ -39,6 +41,7 @@ Create a stage for building the project that contains the template:
 ```yml
 # azure-pipelines.yml
 - stage: Build
+  dependsOn: []
   jobs:
     - template: jobs/build.yml@azure-pipelines-spfx-templates
 ```
@@ -48,6 +51,7 @@ Create a stage for testing the project that contains the template:
 ```yml
 # azure-pipelines.yml
 - stage: Test
+  dependsOn: []
   jobs:
     - template: jobs/test.yml@azure-pipelines-spfx-templates
 ```
@@ -57,13 +61,13 @@ Create a stage for deploying the project that contains the template:
 ```yml
 # azure-pipelines.yml
 - stage: Deploy
+  dependsOn:
+    - Build
+    - Test
   jobs:
     - template: jobs/deploy.yml@azure-pipelines-spfx-templates
-      dependsOn:
-        - Build
-        - Test
       parameters:
-        target_environment: dev_environment
+        target_environment: development
         o365_user_login: foo@contoso.onmicrosoft.com
         o365_user_password: <password>
         o365_app_catalog_site_url: https://contoso.sharepoint.com/sites/AppCatalog

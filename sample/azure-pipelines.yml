@@ -40,9 +40,10 @@ stages:
     - template: jobs/deploy.yml@azure-pipelines-spfx-templates
       parameters:
         display_name: Deploy to development
+        # comment the next two lines out to use the Microsoft-Hosted agent Ubuntu pool
         pool:
           name: Default
-        target_environment: dev_environment
+        target_environment: Development
         o365_user_login: $(AdminUserLogin)
         o365_user_password: $(AdminUserPassword)
         o365_app_catalog_site_url: https://voitanosdev.sharepoint.com/sites/SPFx-DevOps-DevEnv
@@ -56,9 +57,10 @@ stages:
     - template: jobs/deploy.yml@azure-pipelines-spfx-templates
       parameters:
         display_name: Deploy to production
+        # comment the next two lines out to use the Microsoft-Hosted agent Ubuntu pool
         pool:
           name: Default
-        target_environment: prod_environment
+        target_environment: Production
         o365_user_login: $(AdminUserLogin)
         o365_user_password: $(AdminUserPassword)
         o365_app_catalog_site_url: https://voitanosdev.sharepoint.com/sites/SPFx-DevOps-ProdEnv
