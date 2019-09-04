@@ -9,6 +9,7 @@ resources:
     type: github
     name: voitanos/azure-pipelines-spfx-templates
     endpoint: voitanos-github
+    ref: refs/heads/feature/dynamic-package-manager
 
 variables:
   - group: office365credentials
@@ -19,18 +20,12 @@ stages:
   jobs:
     - template: jobs/build.yml@azure-pipelines-spfx-templates
       parameters:
-        # comment the next two lines out to use the Microsoft-Hosted agent Ubuntu pool
-        pool:
-          name: Default
         working_directory: sample
 - stage: Test
   dependsOn: []
   jobs:
     - template: jobs/test.yml@azure-pipelines-spfx-templates
       parameters:
-        # comment the next two lines out to use the Microsoft-Hosted agent Ubuntu pool
-        pool:
-          name: Default
         working_directory: sample
 - stage: Deploy_Dev
   dependsOn:
@@ -40,9 +35,6 @@ stages:
     - template: jobs/deploy.yml@azure-pipelines-spfx-templates
       parameters:
         display_name: Deploy to development
-        # comment the next two lines out to use the Microsoft-Hosted agent Ubuntu pool
-        pool:
-          name: Default
         target_environment: Development
         o365_user_login: $(AdminUserLogin)
         o365_user_password: $(AdminUserPassword)
@@ -57,9 +49,6 @@ stages:
     - template: jobs/deploy.yml@azure-pipelines-spfx-templates
       parameters:
         display_name: Deploy to production
-        # comment the next two lines out to use the Microsoft-Hosted agent Ubuntu pool
-        pool:
-          name: Default
         target_environment: Production
         o365_user_login: $(AdminUserLogin)
         o365_user_password: $(AdminUserPassword)
