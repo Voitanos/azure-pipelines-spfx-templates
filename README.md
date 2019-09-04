@@ -27,12 +27,19 @@ resources:
   - repository: azure-pipelines-spfx-templates
     type: github
     name: voitanos/azure-pipelines-spfx-templates
+    ref: refs/tags/v1.0.0
     endpoint: github
 ```
 
 > Note: If you do not have a `github` service connection in the project hosting your pipeline (or you do not have access to it), you can create one via **Project Settings**. Just make sure the name of this service connection is specified in the `endpoint` field. See [service connections](https://docs.microsoft.com/azure/devops/pipelines/library/service-endpoints?view=azure-devops&tabs=yaml) for more details.
 >
 > The sample project's service connection is named **voitanos-github**, as it points to this org's repo. The name is entirely up to you though.
+
+#### Important: Consider Referencing Specific Template Versions
+
+It is **strongly recommended** to include the `ref` property as shown above. This points to a specific branch or tag so your pipelines are based on specific templates. To pull from a specific release, use `ref: refs/tags/v1.0.0`. To pull from a specific branch, use `ref: refs/heads/branch-name`.
+
+To use the latest version of the templates, omit the `ref` property to always pull the `master` branch.
 
 ### Step 2: Add the job templates to your Azure pipeline
 
