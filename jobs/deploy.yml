@@ -41,9 +41,11 @@ jobs:
         ##########################################
         ## download previously built *.sppkg
         ##########################################
-        - download: current
+        - task: DownloadPipelineArtifact@2
           displayName: Download SharePoint package (*.sppkg)
-          artifact: spfx-package
+          inputs:
+            buildType: current
+            artifactName: spfx-package
         ##########################################
         ## determine name of generated *.sppkg
         ##########################################

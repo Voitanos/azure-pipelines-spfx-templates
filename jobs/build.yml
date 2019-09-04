@@ -69,6 +69,8 @@ jobs:
   ##########################################
   ## publish *.sppkg as build artifact
   ##########################################
-  - publish: $(Build.Repository.LocalPath)/${{ parameters.working_directory }}/sharepoint/solution/$(GetSharePointPackage.SpPkgFileName)
+  - task: PublishPipelineArtifact@1
     displayName: Publish SharePoint package (*.sppkg)
-    artifact: spfx-package
+    inputs:
+      targetPath: $(Build.Repository.LocalPath)/${{ parameters.working_directory }}/sharepoint/solution/$(GetSharePointPackage.SpPkgFileName)
+      artifact: spfx-package
