@@ -8,6 +8,8 @@ parameters:
     vmImage: ubuntu-latest
   # relative path to the project root if not in root of repo
   working_directory: ''
+  # package manager
+  package_manager: 'npm'
 
 jobs:
 - job: ${{ parameters.job_name }}
@@ -15,11 +17,21 @@ jobs:
   pool: ${{ parameters.pool }}
   steps:
   ##########################################
-  ## install dependencies using Yarn
+  ## install dependencies using specified 
+  ##    package manager
   ##########################################
-  - script: yarn --frozen-lockfile
-    displayName: Install dependencies with Yarn
+  - script: npm install
+    displayName: Install dependencies (NPM)
     workingDirectory: ${{ parameters.working_directory }}
+    condition: eq('${{ parameters.package_manager }}', 'npm')
+  - script: yarn install --frozen-lockfile
+    displayName: Install dependencies (Yarn)
+    workingDirectory: ${{ parameters.working_directory }}
+    condition: eq('${{ parameters.package_manager }}', 'yarn')
+  - script: pnpm install --shamefully-flatten
+    displayName: Install dependencies (with PNPM)
+    workingDirectory: ${{ parameters.working_directory }}
+    condition: eq('${{ parameters.package_manager }}', 'pnpm')
   ##########################################
   ## execute: gulp build
   ##########################################

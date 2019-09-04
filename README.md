@@ -92,12 +92,13 @@ This job template does the following:
 
 #### Parameters
 
-|       Parameter       | Required? |                                               Description                                               |
-| --------------------- | :-------: | ------------------------------------------------------------------------------------------------------- |
-| **job_name**          |    no     | Name of the job, A-Z, a-z, 0-9, and underscore (*Default: build_package*)                               |
-| **display_name**      |    no     | Friendly name to display in the UI (*Default: SPFx production build & packaging*)                       |
-| **pool**              |    no     | Scalar property used to override the default **ubuntu-latest** VM host for the agent.                   |
-| **working_directory** |    no     | Leave blank if project in root of repo; otherwise set to root relative path to project. (*Default: ''*) |
+|       Parameter       | Required? |                                                 Description                                                  |     |     |
+| --------------------- | :-------: | ------------------------------------------------------------------------------------------------------------ | --- | --- |
+| **job_name**          |    no     | Name of the job, A-Z, a-z, 0-9, and underscore (*Default: build_package*)                                    |     |     |
+| **display_name**      |    no     | Friendly name to display in the UI (*Default: SPFx production build & packaging*)                            |     |     |
+| **pool**              |    no     | Scalar property used to override the default **ubuntu-latest** VM host for the agent.                        |     |     |
+| **working_directory** |    no     | Leave blank if project in root of repo; otherwise set to root relative path to project. (*Default: ''*)      |     |     |
+| **package_manager**   |    no     | Which package manager to use to install dependencies: npm/yarn/pnpm. *Must be lowercase.* (*Default: 'npm'*) |     |     |
 
 > NOTE: Refer to the sample project for examples of how to set the **pool** & **working_directory** properties to different values when (1) you want to use a different agent pool, such as self-hosted agents (like the sample uses) or (2) when your project resides in a subfolder.
 
@@ -115,12 +116,13 @@ This job template does the following:
 
 #### Parameters
 
-|       Parameter       | Required? |                                               Description                                               |
-| --------------------- | :-------: | ------------------------------------------------------------------------------------------------------- |
-| **job_name**          |    no     | Name of the job, A-Z, a-z, 0-9, and underscore (*Default: build_package*)                               |
-| **display_name**      |    no     | Friendly name to display in the UI (*Default: SPFx production build & packaging*)                       |
-| **pool**              |    no     | Scalar property used to override the default **ubuntu-latest** VM host for the agent.                   |
-| **working_directory** |    no     | Leave blank if project in root of repo; otherwise set to root relative path to project. (*Default: ''*) |
+|       Parameter       | Required? |                                                 Description                                                  |
+| --------------------- | :-------: | ------------------------------------------------------------------------------------------------------------ |
+| **job_name**          |    no     | Name of the job, A-Z, a-z, 0-9, and underscore (*Default: build_package*)                                    |
+| **display_name**      |    no     | Friendly name to display in the UI (*Default: SPFx production build & packaging*)                            |
+| **pool**              |    no     | Scalar property used to override the default **ubuntu-latest** VM host for the agent.                        |
+| **working_directory** |    no     | Leave blank if project in root of repo; otherwise set to root relative path to project. (*Default: ''*)      |
+| **package_manager**   |    no     | Which package manager to use to install dependencies: npm/yarn/pnpm. *Must be lowercase.* (*Default: 'npm'*) |
 
 > NOTE: Refer to the sample project for examples of how to set the **pool** & **working_directory** properties to different values when (1) you want to use a different agent pool, such as self-hosted agents (like the sample uses) or (2) when your project resides in a subfolder.
 

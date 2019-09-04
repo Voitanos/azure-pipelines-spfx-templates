@@ -9,7 +9,6 @@ resources:
     type: github
     name: voitanos/azure-pipelines-spfx-templates
     endpoint: voitanos-github
-    ref: refs/heads/feature/dynamic-package-manager
 
 variables:
   - group: office365credentials
@@ -27,6 +26,7 @@ stages:
     - template: jobs/test.yml@azure-pipelines-spfx-templates
       parameters:
         working_directory: sample
+        package_manager: yarn
 - stage: Deploy_Dev
   dependsOn:
     - Build
