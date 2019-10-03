@@ -1,0 +1,25 @@
+parameters:
+  # unique name of the job
+  job_name: run_tests
+  # friendly name of the job
+  display_name: Execute lfr tests
+  # agent pool details (default: MSFT hosted Ubuntu)
+  pool: 
+    vmImage: ubuntu-latest
+  # relative path to the project root if not in root of repo
+  working_directory: ''
+  # package manager
+  package_manager: 'npm'
+
+jobs:
+- job: ${{ parameters.job_name }}
+  displayName: ${{ parameters.display_name }}
+  pool:
+    vmImage: ubuntu-latest
+  steps:
+  ##########################################
+  ## LFR script 
+  ## 
+  ##########################################
+  - script: echo "OK"
+    displayName: "Are we getting into this part"
