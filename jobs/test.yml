@@ -47,14 +47,7 @@ jobs:
   - script: yarn run test
     displayName: Run unit tests from test script
     workingDirectory: ${{ parameters.working_directory }}
-  ##########################################
-  ## publish junit test results to devops pipeline run
-  ##########################################
-  - task: PublishTestResults@2
-    displayName: Publish test results
-    inputs:
-      testResultsFormat: JUnit
-      testResultsFiles: '**/junit.xml'
+    continueOnError: true
   ##########################################
   ## publish code coverage results to devops pipeline run
   ##########################################
@@ -63,3 +56,12 @@ jobs:
     inputs:
       codeCoverageTool: cobertura
       summaryFileLocation: '$(System.DefaultWorkingDirectory)/**/*coverage.xml'
+  ##########################################
+  ## publish junit test results to devops pipeline run
+  ##########################################
+  - task: PublishTestResults@2
+    displayName: Publish test results
+    inputs:
+      testResultsFormat: JUnit
+      testResultsFiles: '**/junit.xml'
+      failTaskOnFailedTests: true
