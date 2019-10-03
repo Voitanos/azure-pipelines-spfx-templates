@@ -21,7 +21,8 @@ stages:
       parameters:
         working_directory: sample
 - stage: Test
-  dependsOn: []
+  dependsOn:
+    - Build
   jobs:
     - template: jobs/test.yml@azure-pipelines-spfx-templates
       parameters:
@@ -31,6 +32,7 @@ stages:
   dependsOn:
     - Build
     - Test
+  condition: succeeded()
   jobs:
     - template: jobs/deploy.yml@azure-pipelines-spfx-templates
       parameters:
@@ -45,6 +47,7 @@ stages:
   dependsOn:
     - Build
     - Test
+  condition: succeeded()
   jobs:
     - template: jobs/deploy.yml@azure-pipelines-spfx-templates
       parameters:
