@@ -22,7 +22,7 @@ jobs:
   ##    package manager
   ##########################################
   - script: npm install
-    displayName: Install dependencies (NPM)
+    displayName: xInstall dependencies (NPM)
     workingDirectory: ${{ parameters.working_directory }}
     condition: eq('${{ parameters.package_manager }}', 'npm')
   - script: yarn install --frozen-lockfile
