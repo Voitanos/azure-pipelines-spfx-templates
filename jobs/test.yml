@@ -22,11 +22,11 @@ jobs:
   ##    package manager
   ##########################################
   - script: npm install
-    displayName: Install dependencies (NPM)
+    displayName: Install dependencies (with NPM)
     workingDirectory: ${{ parameters.working_directory }}
     condition: eq('${{ parameters.package_manager }}', 'npm')
   - script: yarn install --frozen-lockfile
-    displayName: Install dependencies (Yarn)
+    displayName: Install dependencies (with Yarn)
     workingDirectory: ${{ parameters.working_directory }}
     condition: eq('${{ parameters.package_manager }}', 'yarn')
   - script: pnpm install --shamefully-flatten
@@ -44,9 +44,20 @@ jobs:
   ##########################################
   ## execute tests
   ##########################################
-  - script: yarn run test
-    displayName: Run unit tests from test script
+  - script: npm test
+    displayName: Run unit tests from test script (with NPM)
     workingDirectory: ${{ parameters.working_directory }}
+    condition: eq('${{ parameters.package_manager }}', 'npm')
+    continueOnError: true
+  - script: yarn run test
+    displayName: Run unit tests from test script (with Yarn)
+    workingDirectory: ${{ parameters.working_directory }}
+    condition: eq('${{ parameters.package_manager }}', 'yarn')
+    continueOnError: true
+  - script: pnpm test
+    displayName: Run unit tests from test script (with PNPM)
+    workingDirectory: ${{ parameters.working_directory }}
+    condition: eq('${{ parameters.package_manager }}', 'pnpm')
     continueOnError: true
   ##########################################
   ## publish code coverage results to devops pipeline run
