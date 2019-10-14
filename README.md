@@ -162,4 +162,4 @@ This job template does the following:
 
 ### Limitations
 
-1. The templates use the Microsoft hosted Linux agent Ubuntu 16.04.
+1. The templates use the Microsoft hosted Linux agent Ubuntu.
