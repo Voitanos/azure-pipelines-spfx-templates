@@ -20,6 +20,7 @@ stages:
     - template: jobs/build.yml@azure-pipelines-spfx-templates
       parameters:
         working_directory: sample
+        node_version: 10.x
 - stage: Test
   dependsOn: []
   jobs:
@@ -27,6 +28,7 @@ stages:
       parameters:
         working_directory: sample
         package_manager: yarn
+        node_version: 10.x
 - stage: Deploy_Dev
   dependsOn:
     - Build
