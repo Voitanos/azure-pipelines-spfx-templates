@@ -46,7 +46,6 @@ jobs:
           inputs:
             buildType: current
             artifactName: spfx-package
-            path: "$(Pipeline.Workspace)/spfx-package"
         ##########################################
         ## determine name of generated *.sppkg
         ##########################################
