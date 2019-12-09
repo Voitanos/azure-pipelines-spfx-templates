@@ -10,12 +10,22 @@ parameters:
   working_directory: ''
   # package manager
   package_manager: 'npm'
+  # node version
+  node_version: ''
 
 jobs:
 - job: ${{ parameters.job_name }}
   displayName: ${{ parameters.display_name }}
   pool: ${{ parameters.pool }}
   steps:
+  ##########################################
+  ## specify which node version to use
+  ##########################################
+  - task: UseNode@1
+    displayName: Set up Node.js environment ${{ parameters.node_version }}
+    inputs:
+      version: ${{ parameters.node_version }}
+    condition: ne('${{ parameters.node_version }}', '')
   ##########################################
   ## install dependencies using specified 
   ##    package manager
