@@ -16,7 +16,7 @@ variables:
   - name: node_version
     value: '10.x'
   - name: package_manager
-    value: 'npm'
+    value: 'yarn'
 
 stages:
 - stage: Build
