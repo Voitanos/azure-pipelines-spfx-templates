@@ -30,7 +30,7 @@ jobs:
   ## install dependencies using specified
   ##    package manager
   ##########################################
-  - script: npm install
+  - script: npm ci
     displayName: Install dependencies (NPM)
     workingDirectory: ${{ parameters.working_directory }}
     condition: eq('${{ parameters.package_manager }}', 'npm')
@@ -38,7 +38,7 @@ jobs:
     displayName: Install dependencies (Yarn)
     workingDirectory: ${{ parameters.working_directory }}
     condition: eq('${{ parameters.package_manager }}', 'yarn')
-  - script: pnpm install --shamefully-flatten
+  - script: pnpm install --shamefully-flatten --frozen-lockfile
     displayName: Install dependencies (with PNPM)
     workingDirectory: ${{ parameters.working_directory }}
     condition: eq('${{ parameters.package_manager }}', 'pnpm')
