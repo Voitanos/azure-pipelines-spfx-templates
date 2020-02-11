@@ -27,18 +27,24 @@ jobs:
       version: ${{ parameters.node_version }}
     condition: ne('${{ parameters.node_version }}', '')
   ##########################################
+  ## install PNPM if that is desired package manager
+  ##########################################
+  - script: sudo npm install --global pnpm
+    displayName: Install PNPM
+    condition: eq('${{ parameters.package_manager }}', 'pnpm')
+  ##########################################
   ## install dependencies using specified
   ##    package manager
   ##########################################
-  - script: npm install
-    displayName: Install dependencies (NPM)
+  - script: npm ci
+    displayName: Install dependencies (with NPM)
     workingDirectory: ${{ parameters.working_directory }}
     condition: eq('${{ parameters.package_manager }}', 'npm')
   - script: yarn install --frozen-lockfile
-    displayName: Install dependencies (Yarn)
+    displayName: Install dependencies (with Yarn)
     workingDirectory: ${{ parameters.working_directory }}
     condition: eq('${{ parameters.package_manager }}', 'yarn')
-  - script: pnpm install --shamefully-flatten
+  - script: pnpm install --shamefully-hoist --frozen-lockfile
     displayName: Install dependencies (with PNPM)
     workingDirectory: ${{ parameters.working_directory }}
     condition: eq('${{ parameters.package_manager }}', 'pnpm')

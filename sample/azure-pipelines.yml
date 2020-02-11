@@ -24,6 +24,7 @@ stages:
     - template: jobs/build.yml@azure-pipelines-spfx-templates
       parameters:
         working_directory: sample
+        package_manager: ${{ variables.package_manager }}
         node_version: ${{ variables.node_version }}
 - stage: Test
   dependsOn: []
