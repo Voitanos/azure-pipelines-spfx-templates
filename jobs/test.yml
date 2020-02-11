@@ -4,14 +4,14 @@ parameters:
   # friendly name of the job
   display_name: Execute tests
   # agent pool details (default: MSFT hosted Ubuntu)
-  pool: 
+  pool:
     vmImage: ubuntu-latest
   # relative path to the project root if not in root of repo
   working_directory: ''
   # package manager
   package_manager: 'npm'
   # node version
-  node_version: ''
+  node_version: '10.x'
 
 jobs:
 - job: ${{ parameters.job_name }}
@@ -23,12 +23,12 @@ jobs:
   ## specify which node version to use
   ##########################################
   - task: UseNode@1
-    displayName: Set up Node.js environment ${{ parameters.node_version }}
+    displayName: Set to Node.js ${{ parameters.node_version }}
     inputs:
       version: ${{ parameters.node_version }}
-    condition: ne('${{ parameters.node_version }}', '')  
+    condition: ne('${{ parameters.node_version }}', '')
   ##########################################
-  ## install dependencies using specified 
+  ## install dependencies using specified
   ##    package manager
   ##########################################
   - script: npm install

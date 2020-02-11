@@ -4,7 +4,7 @@ parameters:
   # friendly name of the job
   display_name: Upload & deploy *.sppkg to SharePoint app catalog
   # agent pool details (default: MSFT hosted Ubuntu)
-  pool: 
+  pool:
     vmImage: ubuntu-latest
   # name of target enviroment deploying to
   target_environment: ''
@@ -18,6 +18,8 @@ parameters:
   # additional arguments to add to execution of o365cli
   o365cli_spoAppAdd_extra_arguments: ''
   o365cli_spoAppDeploy_extra_arguments: ''
+  # node version
+  node_version: '10.x'
 
 jobs:
 - deployment: ${{ parameters.job_name }}
@@ -28,6 +30,14 @@ jobs:
     runOnce:
       deploy:
         steps:
+        ##########################################
+        ## specify which node version to use
+        ##########################################
+        - task: UseNode@1
+          displayName: Set to Node.js ${{ parameters.node_version }}
+          inputs:
+            version: ${{ parameters.node_version }}
+          condition: ne('${{ parameters.node_version }}', '')
         ##########################################
         ## install Office 365 CLI
         ##########################################
@@ -60,7 +70,7 @@ jobs:
         - script: o365 spo app add --filePath "$(Pipeline.Workspace)/spfx-package/$(GetSharePointPackage.SpPkgFileName)" --appCatalogUrl ${{ parameters.o365_app_catalog_site_url }} --scope ${{ parameters.o365cli_app_catalog_scope }} --overwrite ${{ parameters.o365cli_spoAppAdd_extra_arguments }}
           displayName: Upload SharePoint package to Site Collection App Catalog
         ##########################################
-        ## 
+        ##
         ##########################################
         - script: o365 spo app deploy --name $(GetSharePointPackage.SpPkgFileName) --appCatalogUrl ${{ parameters.o365_app_catalog_site_url }} --scope ${{ parameters.o365cli_app_catalog_scope }} ${{ parameters.o365cli_spoAppDeploy_extra_arguments }}
           displayName: Deploy SharePoint package
