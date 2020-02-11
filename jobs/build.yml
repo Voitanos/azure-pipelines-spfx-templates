@@ -38,7 +38,7 @@ jobs:
     displayName: Install dependencies (Yarn)
     workingDirectory: ${{ parameters.working_directory }}
     condition: eq('${{ parameters.package_manager }}', 'yarn')
-  - script: pnpm install --shamefully-flatten --frozen-lockfile
+  - script: pnpm install --shamefully-hoist --frozen-lockfile
     displayName: Install dependencies (with PNPM)
     workingDirectory: ${{ parameters.working_directory }}
     condition: eq('${{ parameters.package_manager }}', 'pnpm')
