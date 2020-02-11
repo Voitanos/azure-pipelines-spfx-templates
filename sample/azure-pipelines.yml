@@ -9,6 +9,7 @@ resources:
     type: github
     name: voitanos/azure-pipelines-spfx-templates
     endpoint: voitanos-github
+    ref: refs/heads/update-gulp-task
 
 variables:
   - group: office365credentials

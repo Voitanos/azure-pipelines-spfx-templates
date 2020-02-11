@@ -51,27 +51,30 @@ jobs:
   ##########################################
   ## execute: gulp build
   ##########################################
-  - task: Gulp@0
+  - task: Gulp@1
     displayName: SPFx build
     inputs:
-      gulpFile: $(Build.Repository.LocalPath)/${{ parameters.working_directory }}/gulpfile.js
+      gulpFile: ${{ parameters.working_directory }}/gulpfile.js
+      workingDirectory: ${{ parameters.working_directory }}
       targets: build
   ##########################################
   ## execute: gulp bundle --ship
   ##########################################
-  - task: Gulp@0
+  - task: Gulp@1
     displayName: SPFx bundle (production)
     inputs:
-      gulpFile: $(Build.Repository.LocalPath)/${{ parameters.working_directory }}/gulpfile.js
+      gulpFile: ${{ parameters.working_directory }}/gulpfile.js
+      workingDirectory: ${{ parameters.working_directory }}
       targets: bundle
       arguments: --ship
   ##########################################
   ## execute: gulp package-solution --ship
   ##########################################
-  - task: Gulp@0
+  - task: Gulp@1
     displayName: SPFx package solution (production)
     inputs:
-      gulpFile: $(Build.Repository.LocalPath)/${{ parameters.working_directory }}/gulpfile.js
+      gulpFile: ${{ parameters.working_directory }}/gulpfile.js
+      workingDirectory: ${{ parameters.working_directory }}
       targets: package-solution
       arguments: --ship
   ##########################################
