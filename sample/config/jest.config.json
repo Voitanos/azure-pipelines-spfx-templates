@@ -3,6 +3,7 @@
   "collectCoverageFrom": [
     "<rootDir>/**/*.{ts,tsx}",
     "!<rootDir>/**/*.scss.*",
+    "!<rootDir>/**/webparts/**/*.ts",
     "!<rootDir>/loc/**/*.*"
   ],
   "coverageDirectory": "<rootDir>/../temp/test",
@@ -21,9 +22,9 @@
     }
   },
   "moduleFileExtensions": [
-    "ts", 
-    "tsx", 
-    "js", 
+    "ts",
+    "tsx",
+    "js",
     "json"
   ],
   "moduleNameMapper": {
@@ -32,9 +33,9 @@
   },
   "reporters":[
     "default",
-    ["jest-junit", { 
+    ["jest-junit", {
       "suiteName": "jest tests",
-      "outputDirectory": "temp/test/junit",
+      "outputDirectory": "temp/test",
       "outputName": "junit.xml"
     }]
   ],

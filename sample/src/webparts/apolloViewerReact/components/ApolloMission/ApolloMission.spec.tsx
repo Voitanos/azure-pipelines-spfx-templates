@@ -1,6 +1,6 @@
 import * as React from 'react';
 import 'jest';
-import { shallow, ShadowWrapper } from 'enzyme';
+import { shallow, ShallowWrapper } from 'enzyme';
 
 import { IMission } from './../../../../models';
 import { ApolloMission } from './';
@@ -55,15 +55,15 @@ test('should render mission', () => {
 test('raise onRemoveMission event when when remove button clicked', () => {
   // create component
   const wrapper = shallow(<ApolloMission mission={ _mission } onRemoveMission={ _onRemoveMissionCallback } />);
-  
+
   // get all anchor tags which are actually buttons
   const buttons = wrapper.find('a');
   expect(buttons.length).toBe(2);
 
   // get the last button which is 'remove'
-  const removeButton: ShadowWrapper = buttons.at(1);
+  const removeButton: ShallowWrapper = buttons.at(1);
   // simulate clicking the button...
-  //  - pass in mock event object that implements the called 
+  //  - pass in mock event object that implements the called
   //    'preventDefault()' method in the actual implementation
   removeButton.simulate('click', { preventDefault: () => undefined });
 
@@ -75,15 +75,15 @@ test('raise onRemoveMission event when when remove button clicked', () => {
 test('return mission when remove button clicked', () => {
   // create component
   const wrapper = shallow(<ApolloMission mission={ _mission } onRemoveMission={ _onRemoveMissionCallback } />);
-  
+
   // get all anchor tags which are actually buttons
   const buttons = wrapper.find('a');
   expect(buttons.length).toBe(2);
 
   // get the last button which is 'remove'
-  const removeButton: ShadowWrapper = buttons.at(1);
+  const removeButton: ShallowWrapper = buttons.at(1);
   // simulate clicking the button...
-  //  - pass in mock event object that implements the called 
+  //  - pass in mock event object that implements the called
   //    'preventDefault()' method in the actual implementation
   removeButton.simulate('click', { preventDefault: () => undefined });
 

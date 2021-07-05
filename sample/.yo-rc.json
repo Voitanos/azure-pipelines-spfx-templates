@@ -2,7 +2,7 @@
   "@microsoft/generator-sharepoint": {
     "isCreatingSolution": true,
     "environment": "spo",
-    "version": "1.8.1",
+    "version": "1.12.1",
     "libraryName": "cswp-apollo-viewer-react",
     "libraryId": "2ef6dc27-9751-4077-9ce7-ee331e35ca09",
     "packageManager": "npm",
