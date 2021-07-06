@@ -75,11 +75,11 @@ Create a stage for deploying the project that contains the template:
     - template: jobs/deploy.yml@azure-pipelines-spfx-templates
       parameters:
         target_environment: development
-        o365_user_login: foo@contoso.onmicrosoft.com
-        o365_user_password: <password>
-        o365_app_catalog_site_url: https://contoso.sharepoint.com/sites/AppCatalog
-        o365cli_app_catalog_scope: tenant
-        o365cli_deploy_extra_arguments: '--skipFeatureDeployment'
+        m365_user_login: foo@contoso.onmicrosoft.com
+        m365_user_password: <password>
+        m365_app_catalog_site_url: https://contoso.sharepoint.com/sites/AppCatalog
+        m365cli_app_catalog_scope: tenant
+        m365cli_deploy_extra_arguments: '--skipFeatureDeployment'
 ```
 
 ## Templates
@@ -132,7 +132,7 @@ This job template does the following:
 | **pool**              |    no     | Scalar property used to override the default **ubuntu-latest** VM host for the agent.                        |
 | **working_directory** |    no     | Leave blank if project in root of repo; otherwise set to root relative path to project. (*Default: ''*)      |
 | **package_manager**   |    no     | Which package manager to use to install dependencies: npm/yarn/pnpm. *Must be lowercase.* (*Default: 'npm'*) |
-| **node_version**      |    no     | Use a specific version of Node.js. (*Default: '10.x'*)                                                       |     |     |
+| **node_version**      |    no     | Use a specific version of Node.js. (*Default: '10.x'*)                                                       |
 
 > NOTE: Refer to the sample project for examples of how to set the **pool** & **working_directory** properties to different values when (1) you want to use a different agent pool, such as self-hosted agents (like the sample uses) or (2) when your project resides in a subfolder.
 
@@ -154,12 +154,12 @@ This job template does the following:
 | **job_name**                       |    no     | Name of the job, A-Z, a-z, 0-9, and underscore (*Default: build_package*)            |     |     |
 | **display_name**                   |    no     | Friendly name to display in the UI (*Default: SPFx production build & packaging*)    |     |     |
 | **pool**                           |    no     | Scalar property used to override the default **ubuntu-latest** VM host for the agent |     |     |
-| **o365cli_deploy_extra_arguments** |    no     | Additional arguments to add to the deploy command                                    |     |     |
+| **m365cli_deploy_extra_arguments** |    no     | Additional arguments to add to the deploy command                                    |     |     |
 | **target_environment**             |    yes    | Name of the environment to submit to                                                 |     |     |
-| **o365_user_login**                |    yes    | Credentials to use to upload & deploy to App Catalog                                 |     |     |
-| **o365_user_password**             |    yes    | Credentials to use to upload & deploy to App Catalog                                 |     |     |
-| **o365_app_catalog_site_url**      |    yes    | URL of the App Catalog site to deploy to                                             |     |     |
-| **o365cli_app_catalog_scope**      |    yes    | App Catalog scope (`tenant` \ `sitecollection`)                                      |     |     |
+| **m365_user_login**                |    yes    | Credentials to use to upload & deploy to App Catalog                                 |     |     |
+| **m365_user_password**             |    yes    | Credentials to use to upload & deploy to App Catalog                                 |     |     |
+| **m365_app_catalog_site_url**      |    yes    | URL of the App Catalog site to deploy to                                             |     |     |
+| **m365cli_app_catalog_scope**      |    yes    | App Catalog scope (`tenant` \ `sitecollection`)                                      |     |     |
 | **node_version**                   |    no     | Use a specific version of Node.js. (*Default: '10.x'*)                               |     |     |
 
 > NOTE: Refer to the sample project for examples of how to set the **pool** property to different values when you want to use a different agent pool, such as self-hosted agents (like the sample uses).
