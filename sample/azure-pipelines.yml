@@ -44,11 +44,11 @@ stages:
         display_name: Deploy to development
         target_environment: Development
         node_version: ${{ variables.node_version }}
-        o365_user_login: $(AdminUserLogin)
-        o365_user_password: $(AdminUserPassword)
-        o365_app_catalog_site_url: https://voitanosdev.sharepoint.com/sites/SPFx-DevOps-DevEnv
-        o365cli_app_catalog_scope: sitecollection
-        o365cli_deploy_extra_arguments: '--skipFeatureDeployment'
+        m365_user_login: $(AdminUserLogin)
+        m365_user_password: $(AdminUserPassword)
+        m365_app_catalog_site_url: https://voitanosdev.sharepoint.com/sites/SPFx-DevOps-DevEnv
+        m365cli_app_catalog_scope: sitecollection
+        m365cli_deploy_extra_arguments: '--skipFeatureDeployment'
 - stage: Deploy_Prod
   dependsOn:
     - Build
@@ -59,8 +59,8 @@ stages:
         display_name: Deploy to production
         target_environment: Production
         node_version: ${{ variables.node_version }}
-        o365_user_login: $(AdminUserLogin)
-        o365_user_password: $(AdminUserPassword)
-        o365_app_catalog_site_url: https://voitanosdev.sharepoint.com/sites/SPFx-DevOps-ProdEnv
-        o365cli_app_catalog_scope: sitecollection
-        o365cli_deploy_extra_arguments: '--skipFeatureDeployment'
+        m365_user_login: $(AdminUserLogin)
+        m365_user_password: $(AdminUserPassword)
+        m365_app_catalog_site_url: https://voitanosdev.sharepoint.com/sites/SPFx-DevOps-ProdEnv
+        m365cli_app_catalog_scope: sitecollection
+        m365cli_deploy_extra_arguments: '--skipFeatureDeployment'

@@ -8,16 +8,16 @@ parameters:
     vmImage: ubuntu-latest
   # name of target enviroment deploying to
   target_environment: ''
-  # o365 user credentials
-  o365_user_login: ''
-  o365_user_password: ''
+  # m365 user credentials
+  m365_user_login: ''
+  m365_user_password: ''
   # app catalog url
-  o365_app_catalog_site_url: ''
+  m365_app_catalog_site_url: ''
   # app catalog scope (tenant|sitecollection)
-  o365cli_app_catalog_scope: ''
-  # additional arguments to add to execution of o365cli
-  o365cli_spoAppAdd_extra_arguments: ''
-  o365cli_spoAppDeploy_extra_arguments: ''
+  m365cli_app_catalog_scope: ''
+  # additional arguments to add to execution of m365cli
+  m365cli_spoAppAdd_extra_arguments: ''
+  m365cli_spoAppDeploy_extra_arguments: ''
   # node version
   node_version: '10.x'
 
@@ -39,15 +39,15 @@ jobs:
             version: ${{ parameters.node_version }}
           condition: ne('${{ parameters.node_version }}', '')
         ##########################################
-        ## install Office 365 CLI
+        ## install CLI for Microsoft 365
         ##########################################
-        - script: sudo npm install --global @pnp/office365-cli
-          displayName: Install Office365 CLI
+        - script: sudo npm install --global @pnp/cli-microsoft365
+          displayName: Install CLI for Microsoft 365
         ##########################################
-        ## login to Office 365 CLI
+        ## login to CLI for Microsoft 365
         ##########################################
-        - script: o365 login ${{ parameters.o365_app_catalog_site_url }} --authType password --userName ${{ parameters.o365_user_login }} --password ${{ parameters.o365_user_password }}
-          displayName: Login to Office365
+        - script: m365 login ${{ parameters.m365_app_catalog_site_url }} --authType password --userName ${{ parameters.m365_user_login }} --password ${{ parameters.m365_user_password }}
+          displayName: Sign into Microsoft 365
         ##########################################
         ## download previously built *.sppkg
         ##########################################
@@ -67,10 +67,10 @@ jobs:
         ##########################################
         ## upload *.sppkg to the target app catalog
         ##########################################
-        - script: o365 spo app add --filePath "$(Pipeline.Workspace)/spfx-package/$(GetSharePointPackage.SpPkgFileName)" --appCatalogUrl ${{ parameters.o365_app_catalog_site_url }} --scope ${{ parameters.o365cli_app_catalog_scope }} --overwrite ${{ parameters.o365cli_spoAppAdd_extra_arguments }}
+        - script: m365 spo app add --filePath "$(Pipeline.Workspace)/spfx-package/$(GetSharePointPackage.SpPkgFileName)" --appCatalogUrl ${{ parameters.m365_app_catalog_site_url }} --scope ${{ parameters.m365cli_app_catalog_scope }} --overwrite ${{ parameters.m365cli_spoAppAdd_extra_arguments }}
           displayName: Upload SharePoint package to Site Collection App Catalog
         ##########################################
         ##
         ##########################################
-        - script: o365 spo app deploy --name $(GetSharePointPackage.SpPkgFileName) --appCatalogUrl ${{ parameters.o365_app_catalog_site_url }} --scope ${{ parameters.o365cli_app_catalog_scope }} ${{ parameters.o365cli_spoAppDeploy_extra_arguments }}
+        - script: m365 spo app deploy --name $(GetSharePointPackage.SpPkgFileName) --appCatalogUrl ${{ parameters.m365_app_catalog_site_url }} --scope ${{ parameters.m365cli_app_catalog_scope }} ${{ parameters.m365cli_spoAppDeploy_extra_arguments }}
           displayName: Deploy SharePoint package
