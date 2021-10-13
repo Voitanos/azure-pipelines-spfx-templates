@@ -1,66 +1,66 @@
 trigger:
   branches:
     include:
-      - '*'
+      - "*"
 
 resources:
   repositories:
-  - repository: azure-pipelines-spfx-templates
-    type: github
-    name: RajatSahani/azure-pipelines-spfx-templates
-    endpoint: RajatSahani-github
+    - repository: azure-pipelines-spfx-templates
+      type: github
+      name: RajatSahani/azure-pipelines-spfx-templates
+      endpoint: RajatSahani-github
 
 variables:
   - group: office365credentials
   - name: node_version
-    value: '10.x'
+    value: "10.x"
   - name: package_manager
-    value: 'npm'
+    value: "npm"
 
 stages:
-- stage: Build
-  dependsOn: []
-  jobs:
-    - template: jobs/build.yml@azure-pipelines-spfx-templates
-      parameters:
-        working_directory: sample
-        package_manager: ${{ variables.package_manager }}
-        node_version: ${{ variables.node_version }}
-- stage: Test
-  dependsOn: []
-  jobs:
-    - template: jobs/test.yml@azure-pipelines-spfx-templates
-      parameters:
-        working_directory: sample
-        package_manager: ${{ variables.package_manager }}
-        node_version: ${{ variables.node_version }}
-- stage: Deploy_Dev
-  dependsOn:
-    - Build
-    - Test
-  jobs:
-    - template: jobs/deploy.yml@azure-pipelines-spfx-templates
-      parameters:
-        display_name: Deploy to development
-        target_environment: Development
-        node_version: ${{ variables.node_version }}
-        m365_user_login: $(AdminUserLogin)
-        m365_user_password: $(AdminUserPassword)
-        m365_app_catalog_site_url: https://voitanosdev.sharepoint.com/sites/SPFx-DevOps-DevEnv
-        m365cli_app_catalog_scope: sitecollection
-        m365cli_deploy_extra_arguments: '--skipFeatureDeployment'
-- stage: Deploy_Prod
-  dependsOn:
-    - Build
-    - Test
-  jobs:
-    - template: jobs/deploy.yml@azure-pipelines-spfx-templates
-      parameters:
-        display_name: Deploy to production
-        target_environment: Production
-        node_version: ${{ variables.node_version }}
-        m365_user_login: $(AdminUserLogin)
-        m365_user_password: $(AdminUserPassword)
-        m365_app_catalog_site_url: https://voitanosdev.sharepoint.com/sites/SPFx-DevOps-ProdEnv
-        m365cli_app_catalog_scope: sitecollection
-        m365cli_deploy_extra_arguments: '--skipFeatureDeployment'
+  - stage: Build
+    dependsOn: []
+    jobs:
+      - template: jobs/build.yml@azure-pipelines-spfx-templates
+        parameters:
+          working_directory: sample
+          package_manager: ${{ variables.package_manager }}
+          node_version: ${{ variables.node_version }}
+  - stage: Test
+    dependsOn: []
+    jobs:
+      - template: jobs/test.yml@azure-pipelines-spfx-templates
+        parameters:
+          working_directory: sample
+          package_manager: ${{ variables.package_manager }}
+          node_version: ${{ variables.node_version }}
+  - stage: Deploy_Dev
+    dependsOn:
+      - Build
+      - Test
+    jobs:
+      - template: jobs/deploy.yml@azure-pipelines-spfx-templates
+        parameters:
+          display_name: Deploy to development
+          target_environment: Development
+          node_version: ${{ variables.node_version }}
+          m365_user_login: $(AdminUserLogin)
+          m365_user_password: $(AdminUserPassword)
+          m365_app_catalog_site_url: https://voitanosdev.sharepoint.com/sites/SPFx-DevOps-DevEnv
+          m365cli_app_catalog_scope: sitecollection
+          m365cli_deploy_extra_arguments: "--skipFeatureDeployment"
+  - stage: Deploy_Prod
+    dependsOn:
+      - Build
+      - Test
+    jobs:
+      - template: jobs/deploy.yml@azure-pipelines-spfx-templates
+        parameters:
+          display_name: Deploy to production
+          target_environment: Production
+          node_version: ${{ variables.node_version }}
+          m365_user_login: $(AdminUserLogin)
+          m365_user_password: $(AdminUserPassword)
+          m365_app_catalog_site_url: https://voitanosdev.sharepoint.com/sites/SPFx-DevOps-ProdEnv
+          m365cli_app_catalog_scope: sitecollection
+          m365cli_deploy_extra_arguments: "--skipFeatureDeployment"
