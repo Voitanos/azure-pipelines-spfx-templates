@@ -7,8 +7,8 @@ resources:
   repositories:
   - repository: azure-pipelines-spfx-templates
     type: github
-    name: voitanos/azure-pipelines-spfx-templates
-    endpoint: voitanos-github
+    name: RajatSahani/azure-pipelines-spfx-templates
+    endpoint: RajatSahani-github
 
 variables:
   - group: office365credentials
